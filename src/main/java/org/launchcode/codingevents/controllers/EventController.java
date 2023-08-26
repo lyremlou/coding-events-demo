@@ -2,11 +2,15 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,11 +31,18 @@ public class EventController {
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
+        model.addAttribute(new Event());
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
 
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+
+         if(errors.hasErrors()) {
+             model.addAttribute("title", "Create Event");
+             return "events/create";
+         }
         EventData.add(newEvent);
         return "redirect:";
     }
@@ -68,10 +79,14 @@ public class EventController {
 
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description) {
+    public String processEditForm(int eventId, String name, String description, String location, int numAttendees, Date dateOfEvent, String contactEmail) {
       Event eventToEdit = EventData.getById(eventId);
       eventToEdit.setName(name);
       eventToEdit.setDescription(description);
+      eventToEdit.setLocation(location);
+      eventToEdit.setDateOfEvent(dateOfEvent);
+      eventToEdit.setNumAttendees(numAttendees);
+      eventToEdit.setContactEmail(contactEmail);
       return "redirect:";
     }
 
