@@ -3,15 +3,19 @@ package org.launchcode.codingevents.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class Event {
 
-
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
     @NotBlank
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
     private String name;
@@ -40,7 +44,6 @@ public class Event {
 
 
     public Event(String name, String description, String location, int numAttendees, Date dateOfEvent, boolean mustRegister, String contactEmail, EventType type) {
-        this();
         this.name = name;
         this.description = description;
         this.location = location;
@@ -53,8 +56,6 @@ public class Event {
     }
 
     public Event() {
-        this.id = nextId;
-        nextId++;
     }
 
     public String getName() {
