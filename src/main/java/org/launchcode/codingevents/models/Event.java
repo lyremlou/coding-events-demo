@@ -21,20 +21,20 @@ public class Event {
     private String name;
     @Size(max = 500, message = "Description too long.")
     private String description;
-    @NotBlank(message = "Location is required.")
-    @NotNull
-    @Size(min = 3, max = 50)
-    private String location;
+//    @NotBlank(message = "Location is required.")
+//    @NotNull
+//    @Size(min = 3, max = 50)
+//    private String location;
 
-    @Positive(message = "Number of attendees must be at least one.")
-    private int numAttendees;
+//    @Positive(message = "Number of attendees must be at least one.")
+//    private int numAttendees;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @Future
-    private Date dateOfEvent;
+//    @JsonFormat(pattern="yyyy-MM-dd")
+//    @Future
+//    private Date dateOfEvent;
 
-    @AssertTrue(message = "Registration required, field must be true.")
-    private boolean mustRegister = true;
+//    @AssertTrue(message = "Registration required, field must be true.")
+//    private boolean mustRegister = true;true
     @NotBlank
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
@@ -46,10 +46,10 @@ public class Event {
     public Event(String name, String description, String location, int numAttendees, Date dateOfEvent, boolean mustRegister, String contactEmail, EventType type) {
         this.name = name;
         this.description = description;
-        this.location = location;
-        this.numAttendees = numAttendees;
-        this.dateOfEvent = dateOfEvent;
-        this.mustRegister = mustRegister;
+//        this.location = location;
+//        this.numAttendees = numAttendees;
+//        this.dateOfEvent = dateOfEvent;
+//        this.mustRegister = mustRegister;
         this.contactEmail = contactEmail;
         this.type = type;
 
@@ -82,37 +82,37 @@ public class Event {
         this.contactEmail = contactEmail;
     }
 
-    public String getLocation() {
-        return location;
-    }
+//    public String getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(String location) {
+//        this.location = location;
+//    }
+//
+//    public int getNumAttendees() {
+//        return numAttendees;
+//    }
+//
+//    public void setNumAttendees(int numAttendees) {
+//        this.numAttendees = numAttendees;
+//    }
+//
+//    public Date getDateOfEvent() {
+//        return dateOfEvent;
+//    }
+//
+//    public void setDateOfEvent(Date dateOfEvent) {
+//        this.dateOfEvent = dateOfEvent;
+//    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getNumAttendees() {
-        return numAttendees;
-    }
-
-    public void setNumAttendees(int numAttendees) {
-        this.numAttendees = numAttendees;
-    }
-
-    public Date getDateOfEvent() {
-        return dateOfEvent;
-    }
-
-    public void setDateOfEvent(Date dateOfEvent) {
-        this.dateOfEvent = dateOfEvent;
-    }
-
-    public boolean isMustRegister() {
-        return mustRegister;
-    }
-
-    public void setMustRegister(boolean mustRegister) {
-        this.mustRegister = mustRegister;
-    }
+//    public boolean isMustRegister() {
+//        return mustRegister;
+//    }
+//
+//    public void setMustRegister(boolean mustRegister) {
+//        this.mustRegister = mustRegister;
+//    }
 
     public EventType getType() {
         return type;
