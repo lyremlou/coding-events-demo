@@ -7,25 +7,19 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-public class EventCategory {
+public class EventCategory extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private int id;
 
     @Size(min=3, max=25, message="3 character minimum" )
     private String name;
 
     public EventCategory(int id, String name) {
-        this.id = id;
         this.name = name;
     }
 
     public EventCategory() {}
 
-    public int getId() {
-        return id;
-    }
+
 
     public String getName() {
         return name;
@@ -35,16 +29,7 @@ public class EventCategory {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof EventCategory)) return false;
-        EventCategory that = (EventCategory) o;
-        return id == that.id && Objects.equals(name, that.name);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
+
+
 }
