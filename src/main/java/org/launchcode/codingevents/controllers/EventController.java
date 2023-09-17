@@ -33,22 +33,31 @@ public class EventController {
     private TagRepository tagRepository;
 
     @GetMapping
-    public String displayAllEvents(@RequestParam(required=false) Integer categoryId, Model model) {
+    public String displayAllEvents(@RequestParam(required=false) Integer categoryId, @RequestParam(required = false) Integer tagId, Model model) {
 
-        if (categoryId == null) {
+        if (categoryId == null && tagId == null) {
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
         } else {
             Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+            Optional<Tag> tagResult = tagRepository.findById(tagId);
             if (result.isEmpty()) {
                 model.addAttribute("title", "Invalid Category Id: " + categoryId);
+            } else if (tagResult.isEmpty()) {
+                model.addAttribute("title", "Invalid Tag Id: " + tagId);
             } else {
 
                 EventCategory category = result.get();
                 model.addAttribute("title", "Events in category: " + category.getName());
                 model.addAttribute("events", category.getEvents());
+
+                Tag tag = tagResult.get();
+                model.addAttribute("title", "Events with tag: " + tag.getName());
+                model.addAttribute("events", tag.getEvents());
             }
         }
+
+
 
         return "events/index";
     }
